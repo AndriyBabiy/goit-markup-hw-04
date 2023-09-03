@@ -101,6 +101,7 @@ button {
 /* #region top bar */
 .top-bar {
   border-bottom: 1px solid var(--cornflower, #E7E9FC);
+  box-shadow: 0px 1px 6px 0px rgba(46, 47, 66, 0.08), 0px 1px 1px 0px rgba(46, 47, 66, 0.16), 0px 2px 1px 0px rgba(46, 47, 66, 0.08);
 }
 
 .top-bar .container {
@@ -252,6 +253,11 @@ Pop-up window
 ---------------------
 */
 
+.backdrop.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
 
 .backdrop {
   position: fixed;
@@ -268,11 +274,7 @@ Pop-up window
   transition: opacity var(--transition-standard), visibility var(--transition-standard);
 }
 
-.backdrop.is-hidden {
-  opacity: 0;
-  pointer-events: none;
-  visibility: hidden;
-}
+
 
 .modal {
   position: relative;
