@@ -8,11 +8,13 @@
   --lightslate: #8e8f99;
   --cornflower: #e7e9fc;
   --cloud: #f4f4fd;
-  --navyblue-modal: #2e2f42;
+  --navyblue-modal: rgba(46, 47, 66, 0.40);
   --dairy: #fcfcfc;
 
   --font-roboto: "Roboto", sans-serif;
   --font-raleway: "Raleway", sans-serif;
+
+  --transition-standard: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* #endregion */
@@ -115,22 +117,45 @@ button {
   display: flex;
   margin-right: auto;
   align-items: center;
+
+  color: var(--navyblue)
 }
 
 .top-bar-list {
   gap: 40px;
 }
 
+.top-bar-item {
+  position: relative;
+}
+
+.current {
+  color: var(--ocean);
+}
+
+.current::after {
+  position: absolute;
+  content: "";
+  height: 4px;
+  border-radius: 2px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--ocean);
+}
+
 .top-bar-link {
   display: block;
   padding: 24px 0;
 
-  color: var(--navyblue);
+  color: currentColor;
 
   font-size: 16px;
   font-weight: 500;
   line-height: 1.5;
   letter-spacing: 0.02em;
+
+  transition: color var(--transition-standard);
 }
 
 .top-bar-link:hover,
@@ -154,6 +179,8 @@ button {
   font-size: 16px;
   line-height: 1.5;
   letter-spacing: 0.02em;
+
+  transition: color var(--transition-standard);
 }
 
 .contact-link:hover,
@@ -164,7 +191,9 @@ button {
 
 /* #region hero */
 .hero {
-  background-color: var(--navyblue);
+  background-image: linear-gradient(rgba(46, 47, 66, 0.7), rgba(46, 47, 66, 0.7)), url(../images/people-office.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
 
   display: flex;
   align-items: center;
@@ -208,18 +237,90 @@ button {
   background-color: var(--iris);
   border-radius: 4px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
+
+  transition: background-color var(--transition-standard);
 }
 
 .hero-button:hover,
 .hero-button:focus {
   background-color: var(--ocean);
 }
+
+/*
+--------------------- 
+Pop-up window
+---------------------
+*/
+
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+
+  background-color: var(--navyblue-modal);
+
+  opacity: 1;
+  visibility: visible;
+
+  transition: opacity var(--transition-standard), visibility var(--transition-standard);
+}
+
+.backdrop.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.modal {
+  position: relative;
+  width: 408px;
+  height: 584px;
+
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  flex-shrink: 0;
+
+  border-radius: 4px;
+
+  background-color: var(--dairy);
+  box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.20), 0px 1px 3px 0px rgba(0, 0, 0, 0.12), 0px 1px 1px 0px rgba(0, 0, 0, 0.14);
+}
+
+.modal-button {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 24px;
+  height: 24px;
+
+  background-color: var(--cornflower);
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  border-radius: 50%;
+
+  top: 24px;
+  right: 24px;
+
+  cursor: pointer;
+}
+
+.modal-close-buttom {
+}
+
 /* #endregion */
 
 /* #region home main */
 .process-heading,
 .offering-heading,
-.team-heading {
+.team-heading,
+.customers-heading {
   color: var(--navyblue);
   font-size: 36px;
   line-height: 1.11;
@@ -230,9 +331,23 @@ button {
   margin-bottom: 72px;
 }
 
+/*
+--------------------- 
+Process 
+---------------------
+*/
+
 .process {
   display: flex;
   padding: 120px 0;
+}
+
+.process .icon-container {
+  display: flex;
+  padding: 24px 100px;
+  margin-bottom: 8px;
+
+  background-color: var(--cloud);
 }
 
 .process-item {
@@ -259,9 +374,21 @@ button {
   letter-spacing: 0.02em;
 }
 
+/*
+--------------------- 
+Offering
+---------------------
+*/
+
 .offering {
   padding-bottom: 120px;
 }
+
+/*
+--------------------- 
+Team
+---------------------
+*/
 
 .team {
   background-color: var(--cloud);
@@ -280,13 +407,15 @@ button {
   box-shadow: 0px 2px 1px 0px rgba(46, 47, 66, 0.08), 0px 1px 1px 0px rgba(46, 47, 66, 0.16), 0px 1px 6px 0px rgba(46, 47, 66, 0.08);
 }
 
-.card-text {
+.card-content {
   display: flex;
   width: 232px;
   padding: 32px 0;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  gap: 8px;
 }
 
 .team-member-name {
@@ -295,8 +424,6 @@ button {
   font-weight: 500;
   line-height: 24px;
   letter-spacing: 0.4px;
-
-  margin-bottom: 8px;
 
   text-align: center;
 }
@@ -309,12 +436,87 @@ button {
 
   text-align: center;
 }
+
+.social-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 24px;
+}
+
+.social-account-link {
+  background-color: var(--iris);
+  border-radius: 50%;
+
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: background-color var(--transition-standard);
+}
+
+.social-icon {
+  fill: var(--cloud);
+}
+
+.social-account-link:hover,
+.social-account-link:focus {
+  background-color: var(--ocean);
+}
+
+
+/*
+--------------------- 
+Customers
+---------------------
+*/
+
+.customers {
+  padding-top: 120px;
+  padding-bottom: 120px;
+}
+
+.customers-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  flex-basis: calc((100% - 24px * 5) / 6);
+  padding: 15px 0;
+
+  border: 1px solid var(--lightslate);
+  border-radius: 4px;
+
+  color: var(--lightslate);
+
+  transition: border var(--transition-standard), color var(--transition-standard);
+}
+
+.customers-item:hover,
+.customers-item:focus {
+  border: 1px solid var(--ocean);
+  color: var(--ocean);
+}
+
+.customer-logo-svg {
+  fill: currentColor;
+}
+
 /* #endregion */
 
 /* #region footer */
 .footer {
   background-color: var(--navyblue);
   padding: 100px 0;
+}
+
+.footer-sections {
+  display: inline-flex;
+  gap: 120px;
 }
 
 .footer-logo {
@@ -332,6 +534,15 @@ button {
   font-size: 16px;
   line-height: 1.5;
   letter-spacing: 0.02em;
+}
+
+.footer-socials .footer-text {
+  margin-bottom: 8px;
+}
+
+.footer-socials .social-account-link:hover,
+.footer-socials .social-account-link:focus {
+  background-color: var(--green);
 }
 /* #endregion */
 
@@ -368,6 +579,8 @@ button {
   border: 1px solid var(--cornflower);
   border-radius: 4px;
   background: var(--cloud);
+
+  transition: color var(--transition-standard), background-color var(--transition-standard), border var(--transition-standard), box-shadow var(--transition-standard);
 }
 
 .filters-button:hover,
@@ -375,6 +588,7 @@ button {
   color: #fff;
   background-color: var(--ocean);
   border: 1px solid transparent;
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.12), 0px 2px 1px 0px rgba(0, 0, 0, 0.08), 0px 3px 1px 0px rgba(0, 0, 0, 0.10);
 }
 
 .portfolio-list {
@@ -386,6 +600,49 @@ button {
 
 .portfolio-item {
   flex-basis: calc((100% - 24px * 2) / 3);
+
+  transition: box-shadow var(--transition-standard);
+}
+
+.portfolio-item-thumb {
+  position: relative;
+  overflow: hidden;
+}
+
+.overlay {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+
+  top: 0;
+  left: 0;
+
+  height: 100%;
+  width: 100%;
+
+  color: var(--cloud);
+  background-color: var(--iris);
+
+  transform: translateY(100%);
+
+  transition: transform var(--transition-standard);
+}
+
+.overlay-text {
+  padding: 40px 32px 0 32px;
+
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+}
+
+.portfolio-item:hover,
+.portfolio-item:focus {
+  box-shadow: 0px 2px 1px 0px rgba(46, 47, 66, 0.08), 0px 1px 1px 0px rgba(46, 47, 66, 0.16), 0px 1px 6px 0px rgba(46, 47, 66, 0.08);
+}
+
+.portfolio-item:hover .overlay,
+.portfolio-item:focus .overlay {
+  transform: translateY(0);
 }
 
 .portfolio-item-text {
