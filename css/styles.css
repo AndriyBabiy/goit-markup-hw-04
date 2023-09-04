@@ -503,6 +503,17 @@ Customers
   margin-bottom: 16px;
 }
 
+.footer-socials .social-icons {
+  justify-content: start;
+}
+
+.footer-socials .social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
 .footer-socials .social-link:hover,
 .footer-socials .social-link:focus {
   background-color: var(--green);
