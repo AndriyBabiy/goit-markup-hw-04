@@ -126,11 +126,8 @@ button {
   gap: 40px;
 }
 
-.top-bar-item {
-  position: relative;
-}
-
 .current {
+  position: relative;
   color: var(--ocean);
 }
 
@@ -505,13 +502,13 @@ Customers
 
 .footer-socials .social-icons {
   justify-content: start;
+  gap: 16px;
 }
 
 .footer-socials .social-link {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 16px;
 }
 
 .footer-socials .social-link:hover,
