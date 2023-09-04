@@ -126,6 +126,20 @@ button {
   gap: 40px;
 }
 
+.top-bar-link {
+  display: block;
+  padding: 24px 0;
+
+  color: currentColor;
+
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+
+  transition: color var(--transition-standard);
+}
+
 .current {
   position: relative;
   color: var(--ocean);
@@ -140,20 +154,6 @@ button {
   left: 0;
   right: 0;
   background-color: var(--ocean);
-}
-
-.top-bar-link {
-  display: block;
-  padding: 24px 0;
-
-  color: currentColor;
-
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1.5;
-  letter-spacing: 0.02em;
-
-  transition: color var(--transition-standard);
 }
 
 .top-bar-link:hover,
